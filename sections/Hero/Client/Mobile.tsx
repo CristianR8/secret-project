@@ -22,7 +22,7 @@ export default function HeroMobileClient({
         autoPlay
         muted
         playsInline
-        poster="/Hero/elementis-cover-mjpg.png"
+        poster="/Hero/cvail-cover-mjpg.png"
         onEnded={() => {
           const nextSrc =
             videoSrc === "/Hero/eye.mp4" ? "/Hero/bunny.mp4" : "/Hero/eye.mp4";

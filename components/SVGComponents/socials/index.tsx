@@ -7,7 +7,7 @@ import YoutubeLogo from "./YoutubeLogo";
 const SocialLogos = [
   {
     logo: <InstagramLogo />,
-    href: "https://www.instagram.com/elementis.co/",
+    href: "https://www.instagram.com/cvail.co/",
     key: "instagram",
   },
   {
@@ -22,12 +22,12 @@ const SocialLogos = [
   },
   {
     logo: <WhatsappLogo />,
-    href: "https://www.tiktok.com/@elementis.co",
+    href: "https://www.tiktok.com/@cvail.co",
     key: "whatsapp",
   },
   {
     logo: <YoutubeLogo />,
-    href: "https://www.youtube.com/@elementis-co",
+    href: "https://www.youtube.com/@cvail-co",
     key: "youtube",
   },
 ];

@@ -16,7 +16,7 @@ export default function Footer() {
     { href: "/research", link: "Research" },
     { href: "/news", link: "News" },
     { href: "/people", link: "People" },
-    { href: "/about", link: "About us" },
+    /* { href: "/about", link: "About us" }, */
   ];
 
   return (
@@ -57,7 +57,7 @@ export default function Footer() {
       </div>
       <div className="flex flex-col gap-y-4 bg-[#2B3530] px-3-75 py-7-5 text-xs text-[#D1CCBF] md:flex-row md:justify-between md:pb-10 md:text-base [&_.animated-underline]:h-px [&_.animated-underline]:bg-[#D1CCBF]">
         <div className="md:flex-1">© 2025 CVAIL. All Rights Reserved</div>
-        <Link href="https://elementis.co/privacy-terms">
+        <Link href="https://cvail.co/privacy-terms">
           <DashedLink className="w-fit cursor-pointer">
             Policies and Terms
           </DashedLink>

@@ -28,7 +28,7 @@ export default function FormServer() {
             Take the First step
           </div>
           <div className="mt-8 mb-10 text-base md:text-lg">
-            Become a member of ELEMENTIS Club and take the first step towards a
+            Become a member of CVAIL Club and take the first step towards a
             life filled with purpose, Wellness, and connection
           </div>
           <div className="flex flex-col gap-4">
@@ -49,7 +49,7 @@ export default function FormServer() {
             </Label>
           </div>
           <div className="mt-10 space-y-5 text-sm text-[#2b3530] md:text-base">
-            <p>I would like to receive information on ELEMENTIS.</p>
+            <p>I would like to receive information on CVAIL.</p>
             <div className="flex flex-wrap gap-4">
               {categories.map((category) => (
                 <Checkbox key={category}>{category}</Checkbox>

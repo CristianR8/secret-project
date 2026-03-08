@@ -83,7 +83,7 @@ export default function VideoPlayer({
                     videoProgress.set(videoRef.current?.currentTime as number);
                   }}
                 >
-                  <source src="/Hero/elementis-fullmp4.mp4" type="Video/mp4" />
+                  <source src="/Hero/cvail-fullmp4.mp4" type="Video/mp4" />
                 </video>
               </div>
               <div

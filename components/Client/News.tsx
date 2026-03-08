@@ -1,78 +1,107 @@
 "use client";
 import React, { useRef, useState } from "react";
-import Image, { StaticImageData } from "next/image";
 import Image1 from "@/public/News/iccv.png";
 import Image2 from "@/public/News/colcaci.jpeg";
 import Image3 from "@/public/News/soccernet.jpeg";
-import {
-  motion,
-  MotionValue,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-} from "motion/react";
-import NewsCard from "./NewsCard";
-import useMaskImage from "@/hooks/useMaskImage";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import LastNews, { NewsItem } from "./LastNews";
 import CustomCursor from "./Cursor";
 import { useCursor } from "@/hooks/useCursor";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
-import { useRouter } from "next/navigation";
-import { cubicBezier } from "motion";
 import { useIsMobile } from "@/app/providers";
+import { useRouter } from "next/navigation";
 
 function News() {
   const isMobile = useIsMobile();
   const router = useRouter();
-  const [state, setState] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const { handlers, cursorProps } = useCursor();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const items: NewsItem[] = [
+    {
+      titleLines: ["ICCV", "2025"],
+      descriptionLines: [
+        "Our student Fabian proudly participated",
+        "in the International Conference ICCV 2025,",
+        "showcasing cutting-edge research in",
+        "spectral unmixing",
+      ],
+      image: Image1,
+      category: "Conference",
+      body: [
+        "This dummy article represents a longer writeup about our participation in ICCV 2025, including poster presentation details, technical discussion, and research context.",
+        "Use this modal layout to place a full article summary, publication links, author list, event highlights, and any supporting media without forcing the user to leave the page.",
+        "The panel scroll is independent from the background so the rest of the homepage stays visually present but inactive while the article is open.",
+      ],
+    },
+    {
+      titleLines: ["ColCACI", "2025"],
+      descriptionLines: [
+        "Our team presented several projects at the",
+        "Colombian Conference on Applications of",
+        "Computational Intelligence, showcasing innovative",
+        "solutions in artificial intelligence and",
+        "machine learning applications.",
+      ],
+      image: Image2,
+      category: "Event",
+      body: [
+        "This dummy article can contain a conference recap, list of accepted works, photos from the event, and a concise explanation of the projects shown by the lab.",
+        "It is structured for long-form reading inside a side panel so users can explore the content without losing context from the main page.",
+        "You can later swap this placeholder content for CMS-driven news data or structured article entries.",
+      ],
+    },
+    {
+      titleLines: ["SoccerNet Challenge", "First Place"],
+      descriptionLines: [
+        "We celebrate our victory in the SoccerNet Challenge 2025!",
+        "Our team took first place with an advanced",
+        "system for effectively predicting depth in soccer images,",
+        "achieving the best performance in the competition.",
+      ],
+      image: Image3,
+      category: "Award",
+      body: [
+        "This dummy article is intended for a competition win announcement, including the benchmark setting, method summary, and why the result matters for the lab.",
+        "The side modal can also include extra screenshots, metrics, and links to code or paper pages in a format that remains easy to scan.",
+        "Because the modal scrolls internally, the article can be as long as needed without affecting the underlying homepage structure.",
+      ],
+    },
+  ];
+  const SCROLL_VH_PER_NEWS = 160;
+  const totalScrollHeight = Math.max(360, items.length * SCROLL_VH_PER_NEWS);
 
   const { scrollYProgress: parentProgress } = useScroll({
     target: ref,
-    offset: ["15vh 0", "435vh end"],
+    offset: ["start start", "end end"],
   });
 
   useMotionValueEvent(parentProgress, "change", (latest) => {
-    if (latest <= 0.35) {
-      setState(0);
-    } else if (latest <= 0.7) {
-      setState(1);
-    } else if (latest <= 1) {
-      setState(2);
-    }
+    const segment = 1 / items.length;
+    const nextIndex = Math.min(
+      items.length - 1,
+      Math.max(0, Math.floor(latest / segment)),
+    );
+    setCurrentIndex(nextIndex);
   });
-
-  const imgs = [Image1, Image2, Image3];
 
   return (
     <div
-      className="relative h-[420vh] cursor-pointer overflow-clip bg-[#2b3530]"
+      className="relative cursor-pointer overflow-clip"
       ref={ref}
+      style={{ height: `${totalScrollHeight}vh` }}
     >
       <motion.div
         {...handlers}
-        onClick={() => router.replace("https://elementis.co/news")}
         className="sticky -top-[5vh] h-[110vh] md:-top-[15vh] md:h-[130vh]"
       >
-        <NewsCard
+        <LastNews
           scrollYProgress={parentProgress}
-          images={imgs}
+          items={items}
+          currentIndex={currentIndex}
+          onOpen={() => router.push("/news", { scroll: true })}
           className="relative z-10"
         />
-        {Array.from({ length: 2 }, (_, i) => state + i)
-          .filter((elementIndex) => elementIndex < imgs.length)
-          .map((validElementIndex, i) => {
-            return (
-              <News.Container
-                key={"News.Container-" + (i + 1)}
-                isMobile={isMobile}
-                scrollYProgress={parentProgress}
-                index={validElementIndex}
-              >
-                {imgs[validElementIndex]}
-              </News.Container>
-            );
-          })}
       </motion.div>
       {!isMobile && (
         <CustomCursor
@@ -86,44 +115,5 @@ function News() {
     </div>
   );
 }
-
-News.Container = function Container({
-  scrollYProgress,
-  index,
-  children,
-  isMobile,
-}: {
-  scrollYProgress: MotionValue<number>;
-  index: number;
-  children: StaticImageData;
-  isMobile: boolean | null;
-}) {
-  const localScrollYProgress = useTransform(
-    scrollYProgress,
-    [index * 0.3, (index + 0.35) * 0.3 + 0.3],
-    [0, 1],
-    {
-      ease: cubicBezier(0, 0, 1, 1),
-    },
-  );
-  const maskImage = useMaskImage(localScrollYProgress, isMobile);
-  const scaleProgress = useTransform(
-    scrollYProgress,
-    [(index - 1) * 0.35, (index + 1) * 0.35],
-    [1.075, 1],
-  );
-  return (
-    <motion.div
-      className="absolute inset-0 grid place-items-center text-white"
-      style={{ zIndex: -index, maskImage, scale: scaleProgress }}
-    >
-      <Image
-        src={children}
-        alt={`news-image-${index + 1}`}
-        className="h-full w-full origin-bottom object-cover"
-      />
-    </motion.div>
-  );
-};
 
 export default News;

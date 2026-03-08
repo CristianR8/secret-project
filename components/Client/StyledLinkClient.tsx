@@ -22,9 +22,6 @@ export default function StyledLinkClient({
   handleFocus,
 }: StyledLinkClientProps) {
   const [scope, animate] = useAnimate();
-  const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
-    minimumIntegerDigits: 2,
-  });
 
   const handleMouseEnter = (
     e: React.MouseEvent<HTMLElement>,
@@ -86,10 +83,10 @@ export default function StyledLinkClient({
   };
   const childVariants = {
     initial: {
-      color: "#D1CCBF",
+      color: "#EEF2E8",
     },
     whileHover: {
-      color: "#2b3530",
+      color: "#FFFFFF",
     },
   };
   return (
@@ -111,10 +108,10 @@ export default function StyledLinkClient({
           <motion.div
             variants={{ initial: { height: "0%" } }}
             ref={scope}
-            className="absolute inset-x-0 z-10 bg-[#D1CCBF]"
+            className="absolute inset-x-0 z-10 bg-white/15"
           />
           <motion.div
-            className="z-20 flex gap-6 md:gap-28"
+            className="z-20 flex"
             variants={childVariants}
           >
             <motion.div
@@ -122,11 +119,10 @@ export default function StyledLinkClient({
                 initial: { x: 0 },
                 whileHover: { x: "var(--spacing-10)" },
               }}
-              className="text-2xs leading-[1] font-normal md:text-sm"
+              className="text-lg [line-height:1] md:text-26"
             >
-              {leadingZeroFormatter.format(sNo)}
+              {children}
             </motion.div>
-            <div className="text-lg [line-height:1] md:text-26">{children}</div>
           </motion.div>
           <NavigateSVG className="z-20 mr-2.5" animateOnHover />
         </MotionConfig>

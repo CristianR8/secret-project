@@ -6,19 +6,10 @@ import Image, { StaticImageData } from "next/image";
 import CustomLink from "@/components/Server/CustomLink";
 import DashedLink from "@/components/Server/DashedLink";
 import CloseIcon from "@/components/SVGComponents/CloseIcon";
-import Home from "@/public/SideBar/home.png";
-import Destinations from "@/public/SideBar/destination.png";
-import Wellness from "@/public/SideBar/wellness.png";
-import Innovation from "@/public/SideBar/innovation.png";
-import Nature from "@/public/SideBar/nature.png";
-import Community from "@/public/SideBar/community.png";
-import TheStory from "@/public/SideBar/the-story.png";
-import NewDevelopments from "@/public/SideBar/new-developments.png";
-import PressRoom from "@/public/SideBar/press-room.png";
-import Careers from "@/public/SideBar/careers.png";
-import { useImageReveal } from "@/hooks/useImageReveal";
-import StayConnected from "@/components//Server/StayConnected";
 import Link from "next/link";
+import StayConnected from "@/components/Server/StayConnected";
+import { useImageReveal } from "@/hooks/useImageReveal";
+import GroupImage from "@/public/group/people.jpeg";
 
 interface LinkItem {
   href: string;
@@ -32,40 +23,6 @@ interface SideBarProps {
 export default function SideBar({ setOpenSideBar }: SideBarProps) {
   const { imgContainerRef, handleFocus } = useImageReveal();
   const data: LinkItem[] = [
-    { href: "https://elementis.co/", link: "Home", src: Home },
-    {
-      href: "https://elementis.co/destinations",
-      link: "Destinations",
-      src: Destinations,
-    },
-    { href: "https://elementis.co/wellness", link: "Wellness", src: Wellness },
-    {
-      href: "https://elementis.co/innovation",
-      link: "Innovation",
-      src: Innovation,
-    },
-    {
-      href: "https://elementis.co/sustainability",
-      link: "Nature",
-      src: Nature,
-    },
-    {
-      href: "https://elementis.co/community",
-      link: "Community",
-      src: Community,
-    },
-    {
-      href: "https://elementis.co/the-story",
-      link: "The Story",
-      src: TheStory,
-    },
-    {
-      href: "https://elementis.co/new-developments",
-      link: "New Developments",
-      src: NewDevelopments,
-    },
-    { href: "https://elementis.co/press", link: "Press Room", src: PressRoom },
-    { href: "https://elementis.co/careers", link: "Careers", src: Careers },
   ];
 
   const temp = {
@@ -207,7 +164,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
             >
               <div className="text-[#2b3530]/80">Contact Us</div>
               <div className="flex items-center [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
-                <DashedLink>info@ELEMENTIS.co</DashedLink>
+                <DashedLink>info@CVAIL.co</DashedLink>
                 <div className="mx-5">|</div>
                 <DashedLink>+62 823 4078 1817</DashedLink>
               </div>
@@ -234,7 +191,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
               }}
               className="text-1600svh"
             >
-              <Link href="https://elementis.co/privacy-terms">
+              <Link href="https://cvail.co/privacy-terms">
                 <DashedLink className="w-fit text-[#2b3530] [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
                   Policy and Terms
                 </DashedLink>

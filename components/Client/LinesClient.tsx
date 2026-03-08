@@ -7,6 +7,7 @@ import Image2 from "@/public/Lines/dense.png";
 import Image3 from "@/public/Lines/nlp.png";
 import Image4 from "@/public/Lines/nlos.png";
 import Image5 from "@/public/Lines/remote.png";
+import Image6 from "@/public/Lines/rendering.png";
 import { useImageReveal } from "@/hooks/useImageReveal";
 interface LinkType {
   title: string;
@@ -41,11 +42,19 @@ export default function LinesClient() {
       href: "",
       img: Image5,
     },
+    {
+      title: "Rendering",
+      href: "",
+      img: Image6,
+    },
   ];
 
   return (
     <>
-      <div ref={imgContainerRef} className="relative overflow-hidden md:w-fit">
+      <div
+        ref={imgContainerRef}
+        className="relative overflow-hidden rounded-2xl ring-1 ring-white/20 md:w-fit"
+      >
         <Image
           src={links[links.length - 1].img}
           alt="placeholder"
@@ -67,13 +76,14 @@ export default function LinesClient() {
           </motion.div>
         ))}
       </div>
-      <div className="-mx-8-25 grid grid-rows-5 divide-y divide-[#D1CCBF] border-y border-[#D1CCBF] md:col-span-2 md:col-start-2 md:row-start-2 md:mx-0">
+      <div className="-mx-8-25 grid gap-3 md:col-span-2 md:col-start-2 md:row-start-2 md:mx-0">
         {links.map((eachLink, index) => (
           <StyledLinkClient
             handleFocus={handleFocus}
             sNo={index + 1}
             href={eachLink.href}
             key={`link-${index + 1}`}
+            className="rounded-xl border border-white/20 bg-[#1f2824]/55 text-[#EEF2E8] shadow-[0_18px_40px_rgba(0,0,0,0.28)] backdrop-blur-xl"
           >
             {eachLink.title}
           </StyledLinkClient>

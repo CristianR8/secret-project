@@ -57,27 +57,17 @@ export default function Marquee({
   });
 
   return (
-    <>
-      <div className="overflow-hidden">
-        <motion.div
-          className={cn(
-            "text-[100px] [line-height:1] font-light tracking-tight whitespace-nowrap md:text-144",
-            className,
-          )}
-          style={{ x, ...style }}
-        >
-          {children}
-        </motion.div>
-        {/* <motion.div
-          className={cn(
-            "text-[100px] [line-height:1] font-light tracking-tight whitespace-nowrap md:text-144",
-            className,
-          )}
-          style={{ x: "", ...style }}
-        >
-          {children}
-        </motion.div> */}
-      </div>
-    </>
+    <div className="overflow-hidden">
+      <motion.div
+        className={cn(
+          "flex whitespace-nowrap text-[100px] [line-height:1] font-light tracking-tight md:text-144",
+          className,
+        )}
+        style={{ x, ...style }}
+      >
+        <span>{children}</span>
+        <span aria-hidden="true">{children}</span>
+      </motion.div>
+    </div>
   );
 }

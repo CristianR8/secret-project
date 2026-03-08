@@ -5,7 +5,7 @@ import LinesClient from "@/components/Client/LinesClient";
 
 export default function Lines() {
   return (
-    <div className="bg-[#30493D] py-36 text-[#D1CCBF] md:py-60">
+    <div className="py-36 text-[#D1CCBF] md:py-60">
       <ResponsiveMarquee
         animationConfig={{
           mobile: {
@@ -18,7 +18,7 @@ export default function Lines() {
           },
         }}
       >
-        {"Lines of Research • Lines of Research • Lines of Research • "}
+        {"Research Areas • Research Areas • Research Areas • "}
       </ResponsiveMarquee>
 
       <div className="mt-18 flex flex-col gap-y-14 px-8-25 md:mt-26 md:grid md:grid-cols-3 md:grid-rows-[auto_auto] md:gap-y-24 md:px-16">

@@ -10,34 +10,34 @@ interface LinkItem {
 }
 export default function SideBarMobile() {
   const links: LinkItem[] = [
-    { href: "https://elementis.co/", link: "Home" },
+    { href: "https://cvail.co/", link: "Home" },
     {
-      href: "https://elementis.co/destinations",
+      href: "https://cvail.co/destinations",
       link: "Destinations",
     },
-    { href: "https://elementis.co/wellness", link: "Wellness" },
+    { href: "https://cvail.co/wellness", link: "Wellness" },
     {
-      href: "https://elementis.co/innovation",
+      href: "https://cvail.co/innovation",
       link: "Innovation",
     },
     {
-      href: "https://elementis.co/sustainability",
+      href: "https://cvail.co/sustainability",
       link: "Nature",
     },
     {
-      href: "https://elementis.co/community",
+      href: "https://cvail.co/community",
       link: "Community",
     },
     {
-      href: "https://elementis.co/the-story",
+      href: "https://cvail.co/the-story",
       link: "The Story",
     },
     {
-      href: "https://elementis.co/new-developments",
+      href: "https://cvail.co/new-developments",
       link: "New Developments",
     },
-    { href: "https://elementis.co/press", link: "Press Room" },
-    { href: "https://elementis.co/careers", link: "Careers" },
+    { href: "https://cvail.co/press", link: "Press Room" },
+    { href: "https://cvail.co/careers", link: "Careers" },
   ];
   return (
     <div className="fixed top-0 z-[30] h-screen w-full overflow-x-hidden">

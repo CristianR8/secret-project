@@ -3,8 +3,6 @@ import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import CvailLogo from "@/components/SVGComponents/cvail.svg";
 import Image from "next/image";
 import DashedLink from "@/components/Server/DashedLink";
-import BorderedButton from "../Server/BorderedButton";
-import NavigateSVG from "../SVGComponents/NavigateSVG";
 import AnimatedBurger from "../SVGComponents/AnimatedBurger";
 import { useState } from "react";
 import cn from "@/utils/cn";
@@ -40,20 +38,20 @@ export default function NavBar() {
       children: "Research",
     },
     {
-      href: "",
+      href: "/news",
       children: "News",
     },
     {
-      href: "",
+      href: "/people",
       children: "People",
     },
-     {
+    /*  {
       href: "",
       children: "About us",
-    },
+    }, */
     /*
     {
-      href: "https://elementis.co/the-story",
+      href: "https://cvail.co/the-story",
       children: "The Story",
     }, */
   ];
@@ -117,21 +115,7 @@ export default function NavBar() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-8">
-          <BorderedButton
-            className={cn(
-              "relative hidden w-fit cursor-pointer items-center gap-4 px-5 py-4.5 text-base [line-height:0.8] font-normal md:flex",
-              state
-                ? "text-[#2b3530] [&_svg]:[stroke:#2b3530]"
-                : "text-white [&_svg]:[stroke:white]",
-            )}
-          >
-            Join Us
-            <NavigateSVG
-              style={{ fill: state ? "#ffffff" : "#2b3530" }}
-              className="mr-2.5 size-2.5"
-            />
-          </BorderedButton>
+        <div className="flex items-center">
           <motion.button
             initial="initial"
             whileHover="whileHover"

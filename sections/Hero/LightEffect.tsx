@@ -3,6 +3,37 @@
 
 import { useEffect, useRef } from "react";
 
+type TubesApi = {
+  setColors?: (colors: string[]) => void;
+  setLightsColors?: (colors: string[]) => void;
+  setDensity?: (density: number) => void;
+  setTubeCount?: (count: number) => void;
+};
+
+type TubesApp = {
+  tubes?: TubesApi;
+  dispose?: () => void;
+  destroy?: () => void;
+};
+
+type TubesCursorFactory = (
+  canvas: HTMLCanvasElement,
+  options: {
+    tubes: {
+      colors: string[];
+      lights: { intensity: number; colors: string[] };
+      density: number;
+      thickness: number;
+    };
+  },
+) => TubesApp;
+
+type TubesWindow = Window & {
+  TubesCursor?: TubesCursorFactory;
+  tubesCursor?: TubesCursorFactory;
+  tubes1?: TubesCursorFactory;
+};
+
 const PALETTES = [
   ["#ff3cac", "#784ba0", "#2b86c5"],
   ["#00f5a0", "#00d9f5", "#6b5bff"],
@@ -19,116 +50,19 @@ const LIGHT_PALETTES = [
   ["#7f00ff", "#e100ff", "#ff0080", "#00c3ff"],
 ];
 
-function hexToHsl(hex: string) {
-  const clean = hex.replace("#", "");
-  const r = parseInt(clean.slice(0, 2), 16) / 255;
-  const g = parseInt(clean.slice(2, 4), 16) / 255;
-  const b = parseInt(clean.slice(4, 6), 16) / 255;
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  let h = 0;
-  let s = 0;
-  const l = (max + min) / 2;
-  const d = max - min;
-
-  if (d !== 0) {
-    s = d / (1 - Math.abs(2 * l - 1));
-    switch (max) {
-      case r:
-        h = ((g - b) / d + (g < b ? 6 : 0)) * 60;
-        break;
-      case g:
-        h = ((b - r) / d + 2) * 60;
-        break;
-      case b:
-        h = ((r - g) / d + 4) * 60;
-        break;
-    }
-  }
-
-  return { h, s, l };
-}
-
-function hslToHex(h: number, s: number, l: number) {
-  const c = (1 - Math.abs(2 * l - 1)) * s;
-  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
-  const m = l - c / 2;
-  let r = 0;
-  let g = 0;
-  let b = 0;
-
-  if (h >= 0 && h < 60) {
-    r = c;
-    g = x;
-  } else if (h >= 60 && h < 120) {
-    r = x;
-    g = c;
-  } else if (h >= 120 && h < 180) {
-    g = c;
-    b = x;
-  } else if (h >= 180 && h < 240) {
-    g = x;
-    b = c;
-  } else if (h >= 240 && h < 300) {
-    r = x;
-    b = c;
-  } else {
-    r = c;
-    b = x;
-  }
-
-  const toHex = (value: number) =>
-    Math.round((value + m) * 255)
-      .toString(16)
-      .padStart(2, "0");
-
-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-}
-
-function shiftPalette(palette: string[], hueShift: number, satBoost = 0.1) {
-  return palette.map((color) => {
-    const hsl = hexToHsl(color);
-    const nextH = (hsl.h + hueShift + 360) % 360;
-    const nextS = Math.min(1, hsl.s + satBoost);
-    return hslToHex(nextH, nextS, hsl.l);
-  });
-}
-
-function randomColors(count: number) {
-  return new Array(count)
-    .fill(0)
-    .map(
-      () =>
-        `#${Math.floor(Math.random() * 16777215)
-          .toString(16)
-          .padStart(6, "0")}`,
-    );
-}
-
 export default function LightEffect() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let app: {
-      tubes?: {
-        setColors?: (colors: string[]) => void;
-        setLightsColors?: (colors: string[]) => void;
-      };
-      dispose?: () => void;
-      destroy?: () => void;
-    } | null = null;
+    let app: TubesApp | null = null;
 
-    let clickHandler: (() => void) | null = null;
     let mounted = true;
     let colorInterval: number | null = null;
-    let rafId: number | null = null;
 
     const loadGlobalTubesCursor = async () => {
+      const tubeWindow = window as TubesWindow;
       const existing =
-        (window as any).TubesCursor ||
-        (window as any).tubesCursor ||
-        (window as any).tubes1;
+        tubeWindow.TubesCursor || tubeWindow.tubesCursor || tubeWindow.tubes1;
       if (existing) return existing;
 
       await new Promise<void>((resolve, reject) => {
@@ -142,9 +76,7 @@ export default function LightEffect() {
       });
 
       return (
-        (window as any).TubesCursor ||
-        (window as any).tubesCursor ||
-        (window as any).tubes1
+        tubeWindow.TubesCursor || tubeWindow.tubesCursor || tubeWindow.tubes1
       );
     };
 
@@ -152,14 +84,35 @@ export default function LightEffect() {
       if (!canvasRef.current) return;
 
       try {
-        let TubesCursor: any = null;
+        const prefersReducedMotion =
+          window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ??
+          false;
+        const isTouchDevice =
+          window.matchMedia?.("(pointer: coarse)")?.matches ?? false;
+        const hardwareThreads = navigator.hardwareConcurrency ?? 8;
+        const memoryInGb =
+          (navigator as Navigator & { deviceMemory?: number }).deviceMemory ??
+          8;
+        const useLiteMode =
+          prefersReducedMotion ||
+          isTouchDevice ||
+          hardwareThreads <= 4 ||
+          memoryInGb <= 4;
+
+        if (useLiteMode) return;
+
+        let TubesCursor: TubesCursorFactory | null = null;
 
         try {
           const mod = await import(
             /* webpackIgnore: true */
             "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"
           );
-          TubesCursor = typeof mod === "function" ? mod : mod?.default ?? mod;
+          const candidate =
+            (mod as { default?: unknown }).default ?? (mod as unknown);
+          if (typeof candidate === "function") {
+            TubesCursor = candidate as TubesCursorFactory;
+          }
         } catch {
           TubesCursor = await loadGlobalTubesCursor();
         }
@@ -170,42 +123,28 @@ export default function LightEffect() {
           tubes: {
             colors: ["#ff3cac", "#784ba0", "#2b86c5"],
             lights: {
-              intensity: 260,
+              intensity: 180,
               colors: ["#00e5ff", "#ff00ea", "#ffe600", "#00ff8a"],
             },
-            density: 1.6,
-            thickness: 1.1,
+            density: 1.0,
+            thickness: 0.9,
           },
         });
 
-        const setPalette = (variant?: "random" | "palette") => {
-          const useRandom = variant === "random";
-          const palette = useRandom
-            ? randomColors(3)
-            : PALETTES[Math.floor(Math.random() * PALETTES.length)];
-          const lights = useRandom
-            ? randomColors(4)
-            : LIGHT_PALETTES[Math.floor(Math.random() * LIGHT_PALETTES.length)];
+        const setPalette = () => {
+          const palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+          const lights =
+            LIGHT_PALETTES[Math.floor(Math.random() * LIGHT_PALETTES.length)];
           app?.tubes?.setColors?.(palette);
           app?.tubes?.setLightsColors?.(lights);
         };
 
-        clickHandler = () => setPalette("random");
+        const maybeSetDensity = app?.tubes;
+        maybeSetDensity?.setDensity?.(1.0);
+        maybeSetDensity?.setTubeCount?.(36);
 
-        document.body.addEventListener("click", clickHandler);
-
-        const maybeSetDensity = app?.tubes as any;
-        maybeSetDensity?.setDensity?.(1.6);
-        maybeSetDensity?.setTubeCount?.(64);
-
-        const prefersReducedMotion =
-          window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ??
-          false;
-        if (!prefersReducedMotion) {
-          colorInterval = window.setInterval(() => {
-            setPalette("palette");
-          }, 5000);
-        }
+        setPalette();
+        colorInterval = window.setInterval(setPalette, 9000);
       } catch {
         // Ignore failed dynamic load to avoid crashing the hero.
       }
@@ -217,12 +156,6 @@ export default function LightEffect() {
       mounted = false;
       if (colorInterval) {
         window.clearInterval(colorInterval);
-      }
-      if (rafId !== null) {
-        window.cancelAnimationFrame(rafId);
-      }
-      if (clickHandler) {
-        document.body.removeEventListener("click", clickHandler);
       }
       app?.dispose?.();
       app?.destroy?.();
@@ -237,25 +170,24 @@ export default function LightEffect() {
       <canvas
         id="canvas"
         ref={canvasRef}
-        className="h-full w-full"
+        className="h-full w-full opacity-90"
         aria-hidden="true"
       />
       <div
-        ref={overlayRef}
-        className="absolute inset-0 opacity-70"
+        className="absolute inset-0 opacity-60"
         style={{
           background:
             "radial-gradient(60% 60% at 20% 20%, rgba(255, 0, 150, 0.35), transparent 60%), radial-gradient(70% 70% at 80% 30%, rgba(0, 200, 255, 0.35), transparent 65%), radial-gradient(80% 80% at 50% 80%, rgba(140, 255, 120, 0.25), transparent 70%)",
           mixBlendMode: "screen",
-          filter: "blur(22px) saturate(1.4)",
+          filter: "blur(12px) saturate(1.15)",
         }}
       />
-      <div className="noise-layer absolute inset-0 opacity-[0.2]" />
+      <div className="noise-layer absolute inset-0 opacity-[0.12]" />
       <style jsx>{`
         .noise-layer {
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
           mix-blend-mode: soft-light;
-          animation: noise-shift 1.1s steps(2) infinite;
+          animation: noise-shift 2.4s steps(2) infinite;
         }
         @keyframes noise-shift {
           0% {
@@ -272,6 +204,11 @@ export default function LightEffect() {
           }
           100% {
             transform: translate3d(0, 0, 0);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .noise-layer {
+            animation: none;
           }
         }
       `}</style>

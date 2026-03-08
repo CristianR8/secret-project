@@ -1,4 +1,4 @@
-Elementis Task queue:
+CVAIL Task queue:
 
 ParallaxContainer enhancement. violates expectation on 1200 x 800 window size (dry run the algo and identify the bug)
 Core Web Vitals enhancement,

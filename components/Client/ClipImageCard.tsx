@@ -30,7 +30,7 @@ export default function ClipImageCard({
   const [currentState, setCurrentState] = useState(1);
   const data: DataItem[] = [
     {
-      title: [<>ELEMENTIS</>, <>Innovation Culture</>],
+      title: [<>CVAIL</>, <>Innovation Culture</>],
       description: {
         mobile: [
           <>We foster a culture of Innovation that </>,
@@ -113,14 +113,14 @@ export default function ClipImageCard({
           <>views, tactile textures, luxury touches,</>,
           <>and sustainable design principles, we</>,
           <>create a memorable and inviting hotel</>,
-          <>interior that reflects ELEMENTIS</>,
+          <>interior that reflects CVAIL</>,
           <>modern, wooden eco concept.</>,
         ],
         desktop: [
           <>By blending natural elements,panoramic views,</>,
           <>tactile textures, luxury touches, and sustainable</>,
           <>design principles, we create a memorable and</>,
-          <>inviting hotel interior that reflects ELEMENTIS</>,
+          <>inviting hotel interior that reflects CVAIL</>,
           <>modern, wooden eco concept.</>,
         ],
       },
