@@ -15,20 +15,22 @@ export default function OverfitBackground() {
 
       {/* Layer 3: SVG loss curves — the overfitting signature */}
       <svg
-        viewBox="0 0 800 400"
-        className="absolute left-1/2 top-[45%] h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 md:h-[90%] md:w-[85%]"
+        viewBox="-30 0 830 400"
+        className="absolute left-1/2 top-[45%] h-[70%] w-[90%] -translate-x-1/2 -translate-y-1/2 md:h-[90%] md:w-[85%]"
         fill="none"
       >
         {/* Subtle axis lines */}
         <line
           x1="60" y1="350" x2="740" y2="350"
-          stroke="rgba(196,149,106,0.04)"
+          stroke="rgba(196,149,106,0.12)"
           strokeWidth="1"
+          className="overfit-axis-x"
         />
         <line
-          x1="60" y1="50" x2="60" y2="350"
-          stroke="rgba(196,149,106,0.04)"
+          x1="60" y1="350" x2="60" y2="50"
+          stroke="rgba(196,149,106,0.12)"
           strokeWidth="1"
+          className="overfit-axis-y"
         />
         {/* Training loss: smooth descent, flattening */}
         <path
@@ -84,42 +86,44 @@ export default function OverfitBackground() {
         {/* Curve labels */}
         <text
           x="745" y="40"
-          fill="rgba(196,149,106,0.12)"
+          fill="rgba(196,149,106,0.25)"
           fontSize="9"
           fontFamily="monospace"
-          className="overfit-curve-draw"
+          className="overfit-label-train"
         >
           train
         </text>
         <text
           x="745" y="318"
-          fill="rgba(212,165,116,0.09)"
+          fill="rgba(212,165,116,0.20)"
           fontSize="9"
           fontFamily="monospace"
-          className="overfit-curve-draw-delayed"
+          className="overfit-label-test"
         >
           test
         </text>
 
-        {/* Axis labels — very subtle */}
+        {/* Axis labels */}
         <text
           x="400" y="372"
           textAnchor="middle"
-          fill="rgba(196,149,106,0.045)"
+          fill="rgba(196,149,106,0.18)"
           fontSize="10"
           fontFamily="monospace"
           letterSpacing="0.1em"
+          className="overfit-label-epochs"
         >
           epochs
         </text>
         <text
-          x="38" y="200"
+          x="15" y="200"
           textAnchor="middle"
-          fill="rgba(196,149,106,0.045)"
+          fill="rgba(196,149,106,0.18)"
           fontSize="10"
           fontFamily="monospace"
           letterSpacing="0.1em"
-          transform="rotate(-90, 38, 200)"
+          transform="rotate(-90, 15, 200)"
+          className="overfit-label-accuracy"
         >
           accuracy
         </text>

@@ -167,6 +167,52 @@ body {
   to { stroke-dashoffset: 0; }
 }
 
+/* Axis lines: grow from origin */
+.overfit-axis-x {
+  stroke-dasharray: 680;
+  stroke-dashoffset: 680;
+  animation: overfit-draw 1.2s cubic-bezier(0.24, 0.43, 0.15, 0.97) 3.6s forwards;
+}
+
+.overfit-axis-y {
+  stroke-dasharray: 300;
+  stroke-dashoffset: -300;
+  animation: overfit-draw 1s cubic-bezier(0.24, 0.43, 0.15, 0.97) 3.8s forwards;
+}
+
+/* Axis labels: fade in + slide */
+.overfit-label-epochs {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: overfit-label-in 0.8s cubic-bezier(0.24, 0.43, 0.15, 0.97) 4.4s forwards;
+}
+
+.overfit-label-accuracy {
+  opacity: 0;
+  transform: translateX(-8px);
+  animation: overfit-label-in 0.8s cubic-bezier(0.24, 0.43, 0.15, 0.97) 4.6s forwards;
+}
+
+/* Curve labels: fade in + slight slide */
+.overfit-label-train {
+  opacity: 0;
+  transform: translateX(6px);
+  animation: overfit-label-in 0.6s cubic-bezier(0.24, 0.43, 0.15, 0.97) 3.8s forwards;
+}
+
+.overfit-label-test {
+  opacity: 0;
+  transform: translateX(6px);
+  animation: overfit-label-in 0.6s cubic-bezier(0.24, 0.43, 0.15, 0.97) 4.4s forwards;
+}
+
+@keyframes overfit-label-in {
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
 .overfit-noise {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
@@ -176,4 +222,10 @@ body {
   .overfit-gradient { animation: none; }
   .overfit-curve-draw,
   .overfit-curve-draw-delayed { animation: none; stroke-dashoffset: 0; }
+  .overfit-axis-x,
+  .overfit-axis-y { animation: none; stroke-dashoffset: 0; }
+  .overfit-label-epochs,
+  .overfit-label-accuracy,
+  .overfit-label-train,
+  .overfit-label-test { animation: none; opacity: 1; transform: none; }
 }

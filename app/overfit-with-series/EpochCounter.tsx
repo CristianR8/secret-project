@@ -11,8 +11,8 @@ export default function EpochCounter() {
   useMotionValueEvent(epoch, "change", (v) => setCount(Math.round(v)));
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-[#C4956A]/15 bg-[#1f2824]/80 px-4 py-2 font-mono text-xs text-[#C4956A]/50 backdrop-blur-xl md:bottom-8 md:right-8">
-      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#C4956A]/40" />
+    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-[#C4956A]/15 bg-[#1f2824]/80 px-4 py-2 font-mono text-xs text-[#C4956A]/75 backdrop-blur-xl md:bottom-8 md:right-8">
+      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#C4956A]/60" />
       Epoch {count}/∞
     </div>
   );
