@@ -21,6 +21,54 @@ type Group = {
 
 const groups: Group[] = [
   {
+    title: "Director",
+    label: "Director",
+    members: [
+      {
+        name: "Hoover Rueda Chacon",
+        image: "/People/hoover.png",
+      },
+    ],
+  },
+  {
+    title: "MSc Students",
+    label: "MSc Student",
+    members: [
+      {
+        name: "Andrea Parra",
+        image: "/People/andrea.png",
+      },
+      {
+        name: "Cristhian Rey",
+        image: "/People/cristian.png",
+      },
+      {
+        name: "Fabian Perez",
+        image: "/People/fabian.png",
+      },
+      {
+        name: "Guillermo Pinto",
+        image: "/People/guillermo.png",
+      },
+      {
+        name: "Henry Mantilla",
+        image: "/People/henry.png",
+      },
+      {
+        name: "Jorge Garcia",
+        image: "/People/jorge.png",
+      },
+      {
+        name: "Julian Leon",
+        image: "/People/julian.png",
+      },
+      {
+        name: "Manuel Herrera",
+        image: "/People/manuel.png",
+      },
+    ],
+  },
+  {
     title: "Undergraduate Students",
     label: "Undergraduate",
     members: [
@@ -123,54 +171,6 @@ const groups: Group[] = [
       {
         name: "Valentina Perez",
         image: "/People/valentina.png",
-      },
-    ],
-  },
-  {
-    title: "MSc Students",
-    label: "MSc Student",
-    members: [
-      {
-        name: "Andrea Parra",
-        image: "/People/andrea.png",
-      },
-      {
-        name: "Cristhian Rey",
-        image: "/People/cristian.png",
-      },
-      {
-        name: "Fabian Perez",
-        image: "/People/fabian.png",
-      },
-      {
-        name: "Guillermo Pinto",
-        image: "/People/guillermo.png",
-      },
-      {
-        name: "Henry Mantilla",
-        image: "/People/henry.png",
-      },
-      {
-        name: "Jorge Garcia",
-        image: "/People/jorge.png",
-      },
-      {
-        name: "Julian Leon",
-        image: "/People/julian.png",
-      },
-      {
-        name: "Manuel Herrera",
-        image: "/People/manuel.png",
-      },
-    ],
-  },
-  {
-    title: "Director",
-    label: "Director",
-    members: [
-      {
-        name: "Hoover Rueda Chacon",
-        image: "/People/hoover.png",
       },
     ],
   },

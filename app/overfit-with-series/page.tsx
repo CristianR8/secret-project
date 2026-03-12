@@ -137,7 +137,13 @@ export default function OverfitWithSeriesPage() {
                     <p className="text-sm uppercase tracking-[0.16em] text-[#C4956A] md:text-base">
                       ☕ What is Overfit with X?
                     </p>
-                    <p className="mx-auto mt-5 max-w-[820px] text-base [line-height:1.5] text-white/88 md:text-lg">
+                    <p
+                      className="mx-auto mt-5 w-full max-w-[820px] text-base [line-height:1.5] text-white/88 md:text-lg"
+                      style={{
+                        textAlign: "justify",
+                        textJustify: "inter-word",
+                      }}
+                    >
                       <strong className="text-[#D4A574]">
                         Overfit with X
                       </strong>{" "}

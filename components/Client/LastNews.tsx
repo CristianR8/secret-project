@@ -1,25 +1,18 @@
 "use client";
 import { motion, MotionValue } from "motion/react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { CSSProperties } from "react";
 import AnimatedMaskText from "@/components/Client/MaskTextClient";
 import NewsImageContainer from "@/components/Client/NewsImageContainer";
 import SectionTitle from "../Server/SectionTitle";
 import cn from "@/utils/cn";
-
-export interface NewsItem {
-  titleLines: string[];
-  descriptionLines: string[];
-  image: StaticImageData;
-  category: string;
-  body: string[];
-}
+import type { NewsArticle } from "@/app/news/news-data";
 
 interface LastNewsProps {
   scrollYProgress: MotionValue<number>;
-  items: NewsItem[];
+  items: NewsArticle[];
   currentIndex: number;
-  onOpen?: () => void;
+  onOpen?: (item: NewsArticle) => void;
   className?: string;
   style?: CSSProperties;
 }
@@ -58,7 +51,15 @@ export default function LastNews({
           ease: [0.24, 0.43, 0.15, 0.97],
           duration: 0.8,
         }}
-        onClick={onOpen}
+        role="link"
+        tabIndex={0}
+        onClick={() => onOpen?.(currentItem)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            onOpen?.(currentItem);
+          }
+        }}
         className="relative z-20 my-[5vh] flex w-[94%] max-w-[980px] cursor-pointer flex-col items-center gap-6 rounded-2xl border border-white/20 bg-[#1f2824]/55 p-4 text-white shadow-[0_24px_70px_rgba(0,0,0,0.35)] backdrop-blur-xl md:my-0 md:aspect-square md:w-[82vh] md:max-h-[900px] md:max-w-[900px] md:gap-8 md:p-7"
       >
         <div className="flex items-center gap-1 text-2xs text-white/80 md:text-sm">

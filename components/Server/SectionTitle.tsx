@@ -1,5 +1,4 @@
 import { CSSProperties } from "react";
-import BurgerSVG from "../SVGComponents/BurgerSVG";
 import cn from "@/utils/cn";
 
 interface SectionTitleProps {
@@ -16,7 +15,8 @@ export default function SectionTitle({
     <div
       style={{ ...style }}
       className={cn("flex h-fit items-center gap-5", className)}
-    >      <div className="text-base [line-height:1] md:text-xl">{children}</div>
+    >
+      <div className="text-base [line-height:1] md:text-xl">{children}</div>
     </div>
   );
 }

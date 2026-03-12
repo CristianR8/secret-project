@@ -76,7 +76,10 @@ export default function LightEffect() {
       });
 
       return (
-        tubeWindow.TubesCursor || tubeWindow.tubesCursor || tubeWindow.tubes1
+        tubeWindow.TubesCursor ||
+        tubeWindow.tubesCursor ||
+        tubeWindow.tubes1 ||
+        null
       );
     };
 

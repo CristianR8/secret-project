@@ -13,13 +13,21 @@ import CloseIcon from "../SVGComponents/CloseIcon";
 
 export default function NavBar() {
   const isMobile = useIsMobile();
+  const isMobileViewport = isMobile ?? false;
   const [openSideBar, setOpenSideBar] = useState(false);
   const [state, setState] = useState(false);
   const [y, setY] = useState("0%");
   const { scrollY } = useScroll();
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     const scrollValue = latest / window.innerHeight;
     setState(scrollValue > 0.5);
+
+    if (scrollValue <= 0.65) {
+      setY("0%");
+      return;
+    }
+
     if (scrollValue > 0.65) {
       if ((scrollY.getPrevious() as number) < latest) {
         setY("-100%");
@@ -53,7 +61,7 @@ export default function NavBar() {
   return (
     <>
       <motion.div
-        className="fixed top-0 z-[50] flex w-full items-center justify-between px-5 py-10 md:px-16"
+        className="fixed top-0 z-[50] flex w-full items-center justify-between px-5 md:px-16"
         initial="initial"
         animate={state ? "animate" : "initial"}
         transition={{
@@ -68,16 +76,16 @@ export default function NavBar() {
         }}
         variants={{
           initial: {
-            paddingBlock: isMobile
-              ? "calc(var(--multiplier))"
-              : "calc(var(--multiplier))",
+            paddingBlock: isMobileViewport
+              ? "calc(10 * var(--multiplier))"
+              : "calc(6 * var(--multiplier))",
             backgroundColor: "rgba(206, 209, 191,0)",
             y,
           },
           animate: {
-            paddingBlock: isMobile
-              ? "calc(12 * var(--multiplier))"
-              : "calc(6 * var(--multiplier))",
+            paddingBlock: isMobileViewport
+              ? "calc(5 * var(--multiplier))"
+              : "calc(2 * var(--multiplier))",
             backgroundColor: "rgba(206, 209, 191,1)",
             y,
           },
@@ -116,12 +124,10 @@ export default function NavBar() {
             whileHover="whileHover"
             onClick={() => {
               const isOpen = openSideBar;
-              if (isMobile) {
+              if (isMobileViewport) {
                 if (!isOpen) {
-                  //about to open
                   setState(true);
                 } else {
-                  //about to close -> the variant of the nav should be based on the scrollY
                   const scrollValue = scrollY.get() / window.innerHeight;
                   setState(scrollValue > 0.5);
                 }
@@ -131,7 +137,7 @@ export default function NavBar() {
             className="cursor-pointer p-2"
             disabled={isMobile == null}
           >
-            {isMobile && openSideBar ? (
+            {isMobileViewport && openSideBar ? (
               <CloseIcon className="size-7 [&_path]:[stroke-width:1px]" />
             ) : (
               <AnimatedBurger

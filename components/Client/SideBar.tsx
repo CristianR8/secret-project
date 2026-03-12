@@ -9,7 +9,6 @@ import CloseIcon from "@/components/SVGComponents/CloseIcon";
 import Link from "next/link";
 import StayConnected from "@/components/Server/StayConnected";
 import { useImageReveal } from "@/hooks/useImageReveal";
-import GroupImage from "@/public/group/people.jpeg";
 
 interface LinkItem {
   href: string;
