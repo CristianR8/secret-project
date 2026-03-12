@@ -9,6 +9,11 @@ import CloseIcon from "@/components/SVGComponents/CloseIcon";
 import Link from "next/link";
 import StayConnected from "@/components/Server/StayConnected";
 import { useImageReveal } from "@/hooks/useImageReveal";
+import ResearchImage from "@/public/research.jpeg";
+import PeopleImage from "@/public/group/people.jpeg";
+import NewsImage from "@/public/News/iccv.png";
+import OverfitImage from "@/public/photo1.jpeg";
+import { sitePages } from "@/utils/sitePages";
 
 interface LinkItem {
   href: string;
@@ -22,6 +27,11 @@ interface SideBarProps {
 export default function SideBar({ setOpenSideBar }: SideBarProps) {
   const { imgContainerRef, handleFocus } = useImageReveal();
   const data: LinkItem[] = [
+    { ...sitePages[0], src: ResearchImage },
+    { ...sitePages[1], src: PeopleImage },
+    { ...sitePages[2], src: NewsImage },
+    { ...sitePages[3], src: ResearchImage },
+    { ...sitePages[4], src: OverfitImage },
   ];
 
   const temp = {
@@ -92,6 +102,13 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
           className="relative flex-[0.9]"
           ref={imgContainerRef}
         >
+          <Image
+            src={ResearchImage}
+            alt="Research"
+            fill
+            className="object-cover"
+            priority
+          />
           {data.map(({ src, link }, i) => (
             <motion.div
               key={link}
@@ -163,9 +180,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
             >
               <div className="text-[#2b3530]/80">Contact Us</div>
               <div className="flex items-center [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
-                <DashedLink>info@CVAIL.co</DashedLink>
-                <div className="mx-5">|</div>
-                <DashedLink>+62 823 4078 1817</DashedLink>
+                <DashedLink>handsoncvs@gmail.com</DashedLink>
               </div>
             </motion.div>
             <motion.div

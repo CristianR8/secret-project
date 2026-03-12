@@ -16,9 +16,7 @@ export default function ContactUs({
     >
       <div>Contact Us</div>
       <div className="flex cursor-default md:flex-col">
-        <DashedLink>info@CVAIL.co</DashedLink>
-        <div className="md:hidden">|</div>
-        <DashedLink>+62 823 4078 1817</DashedLink>
+        <DashedLink>handsoncvs@gmail.com</DashedLink>
       </div>
     </div>
   );

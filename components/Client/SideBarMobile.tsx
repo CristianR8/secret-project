@@ -1,44 +1,11 @@
 import StyledLink from "@/components/Server/StyledLink";
 import * as motion from "motion/react-client";
-import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import ContactUs from "../Server/ContactUs";
 import StayConnected from "../Server/StayConnected";
 import { AnimatePresence } from "motion/react";
-interface LinkItem {
-  href: string;
-  link: string;
-}
+import { sitePages } from "@/utils/sitePages";
+
 export default function SideBarMobile() {
-  const links: LinkItem[] = [
-    { href: "https://cvail.co/", link: "Home" },
-    {
-      href: "https://cvail.co/destinations",
-      link: "Destinations",
-    },
-    { href: "https://cvail.co/wellness", link: "Wellness" },
-    {
-      href: "https://cvail.co/innovation",
-      link: "Innovation",
-    },
-    {
-      href: "https://cvail.co/sustainability",
-      link: "Nature",
-    },
-    {
-      href: "https://cvail.co/community",
-      link: "Community",
-    },
-    {
-      href: "https://cvail.co/the-story",
-      link: "The Story",
-    },
-    {
-      href: "https://cvail.co/new-developments",
-      link: "New Developments",
-    },
-    { href: "https://cvail.co/press", link: "Press Room" },
-    { href: "https://cvail.co/careers", link: "Careers" },
-  ];
   return (
     <div className="fixed top-0 z-[30] h-screen w-full overflow-x-hidden">
       <AnimatePresence>
@@ -58,7 +25,7 @@ export default function SideBarMobile() {
         >
           <span className="text-sm text-[#2b353080]">Discover Pages</span>
           <div className="my-3200svh text-[#2b3530]">
-            {links.map(({ link, href }, i) => (
+            {sitePages.map(({ link, href }, i) => (
               <StyledLink
                 className="mb-750svh text-lg font-light"
                 key={link}
@@ -70,15 +37,6 @@ export default function SideBarMobile() {
                 {link}
               </StyledLink>
             ))}
-            <motion.button
-              className="mt-14 flex w-full cursor-pointer items-center justify-between px-6 py-5 text-lg font-light text-[#d1ccbf]"
-              initial={{ backgroundColor: "#2b3530" }}
-              whileHover={{ backgroundColor: "#304d3d" }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <span>Join us</span>
-              <NavigateSVG fill="#D1CCBF" />
-            </motion.button>
           </div>
           <ContactUs className="gap-y-8 text-base text-[#2b3530] max-md:mt-16 md:hidden [&>:first-child]:text-sm [&>:first-child]:text-[#2b3530]/80 [&>div]:gap-x-5" />
           <StayConnected className="mt-4800svh gap-y-6 text-sm [line-height:1] text-[#2b3530]/80 [&_div]:gap-x-8 [&_svg]:h-2400svh [&_svg]:w-auto" />

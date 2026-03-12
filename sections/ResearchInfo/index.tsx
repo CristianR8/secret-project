@@ -1,4 +1,8 @@
 import ResearchInfoServer from "./Server";
 export default function ResearchInfo() {
-  return <ResearchInfoServer />;
+  return (
+    <section id="research">
+      <ResearchInfoServer />
+    </section>
+  );
 }

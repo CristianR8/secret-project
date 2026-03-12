@@ -36,7 +36,7 @@ export default function FormServer() {
               <Input type="text" placeholder="Enter your name" />
             </Label>
             <Label label="Email Address">
-              <Input type="email" placeholder="Enter your email address" />
+              <Input type="email" placeholder="handsoncvs@gmail.com" />
             </Label>
             <Label label="Phone number">
               <div className="flex -space-x-4 md:-space-x-6">

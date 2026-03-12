@@ -1,34 +1,22 @@
-import FaceBookLogo from "./FaceBookLogo";
 import InstagramLogo from "./InstagramLogo";
-import TiktokLogo from "./TiktokLogo";
-import WhatsappLogo from "./WhatsappLogo";
+import LinkedinLogo from "./LinkedinLogo";
 import YoutubeLogo from "./YoutubeLogo";
 
 const SocialLogos = [
   {
     logo: <InstagramLogo />,
-    href: "https://www.instagram.com/cvail.co/",
+    href: "https://www.instagram.com/handsoncv/",
     key: "instagram",
   },
   {
-    logo: <FaceBookLogo />,
-    href: "https://www.facebook.com/share/Qfswyjm8Uz44otYs/?mibextid=LQQJ4d",
-    key: "facebook",
-  },
-  {
-    logo: <TiktokLogo />,
-    href: "https://wa.me/6282340781817",
-    key: "tiktok",
-  },
-  {
-    logo: <WhatsappLogo />,
-    href: "https://www.tiktok.com/@cvail.co",
-    key: "whatsapp",
-  },
-  {
     logo: <YoutubeLogo />,
-    href: "https://www.youtube.com/@cvail-co",
+    href: "https://www.youtube.com/@Hands-OnCV",
     key: "youtube",
+  },
+  {
+    logo: <LinkedinLogo />,
+    href: "https://www.linkedin.com/company/hocv",
+    key: "linkedin",
   },
 ];
 

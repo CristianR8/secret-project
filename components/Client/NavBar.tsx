@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useIsMobile } from "@/app/providers";
 import ResponsiveSideBar from "./ResponsiveSideBar";
 import CloseIcon from "../SVGComponents/CloseIcon";
+import { sitePages } from "@/utils/sitePages";
 
 export default function NavBar() {
   const isMobile = useIsMobile();
@@ -36,28 +37,6 @@ export default function NavBar() {
       }
     }
   });
-  const navItems = [
-    {
-      href: "/",
-      children: "Home",
-    },
-    {
-      href: "",
-      children: "Research",
-    },
-    {
-      href: "/news",
-      children: "News",
-    },
-    {
-      href: "/people",
-      children: "People",
-    },
-    {
-      href: "/overfit-with-series",
-      children: "Overfit",
-    },
-  ];
   return (
     <>
       <motion.div
@@ -99,8 +78,8 @@ export default function NavBar() {
           priority
         />
         <nav aria-label="navigation" className="hidden gap-6 md:flex">
-          {navItems.map((eachItem) => (
-            <Link href={eachItem.href} key={eachItem.children}>
+          {sitePages.map((eachItem) => (
+            <Link href={eachItem.href} key={eachItem.link}>
               <DashedLink
                 className={cn(
                   "text-base font-normal",
@@ -113,7 +92,7 @@ export default function NavBar() {
                   initial: { color: "#ffffff" },
                 }}
               >
-                {eachItem.children}
+                {eachItem.link}
               </DashedLink>
             </Link>
           ))}
