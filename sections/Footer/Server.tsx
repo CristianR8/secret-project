@@ -16,7 +16,7 @@ export default function Footer() {
     { href: "/research", link: "Research" },
     { href: "/news", link: "News" },
     { href: "/people", link: "People" },
-    /* { href: "/about", link: "About us" }, */
+    { href: "/overfit-with-series", link: "Overfit" },
   ];
 
   return (

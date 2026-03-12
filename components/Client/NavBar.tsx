@@ -45,15 +45,10 @@ export default function NavBar() {
       href: "/people",
       children: "People",
     },
-    /*  {
-      href: "",
-      children: "About us",
-    }, */
-    /*
     {
-      href: "https://cvail.co/the-story",
-      children: "The Story",
-    }, */
+      href: "/overfit-with-series",
+      children: "Overfit",
+    },
   ];
   return (
     <>
