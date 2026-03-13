@@ -1,18 +1,22 @@
 import Image from "next/image";
-import ResearchImage from "@/public/research.jpeg";
 import SectionTitle from "@/components/Server/SectionTitle";
 import StyledLink from "@/components/Server/StyledLink";
 import MaskText from "@/components/Server/MaskText";
 import ResponsiveImage from "@/components/Client/ResponsiveImage";
+
+const researchImageSrc = "/team.webp";
+
 export default function ResearchInfoServer() {
   return (
     <div className="flex flex-col text-[#D1CCBF] md:grid md:grid-cols-2">
       <div className="overflow-hidden rounded-2xl">
         <ResponsiveImage parallaxAmount={20}>
           <Image
-            src={ResearchImage}
+            src={researchImageSrc}
             alt="wellness-sanctuary-image"
             className="h-auto w-full"
+            width={1600}
+            height={1200}
           />
         </ResponsiveImage>
       </div>

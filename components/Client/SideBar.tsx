@@ -9,16 +9,17 @@ import CloseIcon from "@/components/SVGComponents/CloseIcon";
 import Link from "next/link";
 import StayConnected from "@/components/Server/StayConnected";
 import { useImageReveal } from "@/hooks/useImageReveal";
-import ResearchImage from "@/public/research.jpeg";
-import PeopleImage from "@/public/group/people.jpeg";
+import PeopleImage from "@/public/group.webp";
 import NewsImage from "@/public/News/iccv.png";
 import OverfitImage from "@/public/photo1.jpeg";
 import { sitePages } from "@/utils/sitePages";
 
+const researchImageSrc = "/group.webp";
+
 interface LinkItem {
   href: string;
   link: string;
-  src: StaticImageData;
+  src: StaticImageData | string;
 }
 
 interface SideBarProps {
@@ -27,10 +28,10 @@ interface SideBarProps {
 export default function SideBar({ setOpenSideBar }: SideBarProps) {
   const { imgContainerRef, handleFocus } = useImageReveal();
   const data: LinkItem[] = [
-    { ...sitePages[0], src: ResearchImage },
+    { ...sitePages[0], src: researchImageSrc },
     { ...sitePages[1], src: PeopleImage },
     { ...sitePages[2], src: NewsImage },
-    { ...sitePages[3], src: ResearchImage },
+    { ...sitePages[3], src: researchImageSrc },
     { ...sitePages[4], src: OverfitImage },
   ];
 
@@ -103,7 +104,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
           ref={imgContainerRef}
         >
           <Image
-            src={ResearchImage}
+            src={researchImageSrc}
             alt="Research"
             fill
             className="object-cover"

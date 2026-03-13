@@ -1,5 +1,5 @@
 import SectionTitle from "@/components/Server/SectionTitle";
-import IntroductionImage from "@/public/Team.jpeg";
+import IntroductionImage from "@/public/group.webp";
 import IntroductionSmallImage from "@/public/photo1.jpeg";
 import IntroductionThirdImage from "@/public/photo2.jpeg";
 import * as motion from "motion/react-client";
@@ -39,7 +39,7 @@ export default function IntroductionServer() {
             src={IntroductionImage}
             alt="introduction-image"
             fill
-            className="object-cover"
+            className="object-cover object-[center_62%]"
             sizes="(max-width: 767px) 100vw, 66vw"
           />
         </div>

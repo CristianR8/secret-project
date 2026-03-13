@@ -87,7 +87,7 @@ Components are split by rendering strategy:
 
 **Introduction** (`sections/Introduction/`): "Who are we?" section with 3-column image grid (photo1, photo2, Team.jpeg) and CVAIL mission statement.
 
-**ResearchInfo** (`sections/ResearchInfo/`): 2-column grid with ResponsiveImage parallax (research.jpeg, parallaxAmount={20}) on left, bordered research description with MaskText and "Discover our RESEARCH" link on right.
+**ResearchInfo** (`sections/ResearchInfo/`): 2-column grid with ResponsiveImage parallax (/research.webp, parallaxAmount={20}) on left, bordered research description with MaskText and "Discover our RESEARCH" link on right.
 
 **Lines** (`sections/Lines/`): Research areas section with ResponsiveMarquee scrolling "Research Areas" text, ResponsiveMaskTextVariant for breakpoint-specific copy, and LinesClient for interactive directional image reveals across 6 research topics.
 

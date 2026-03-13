@@ -2,7 +2,7 @@ import Footer from "@/sections/Footer/Server";
 import NavBar from "@/components/Client/NavBar";
 import LightEffect from "@/sections/Hero/LightEffect";
 import Image, { StaticImageData } from "next/image";
-import PeopleBackground from "@/public/group/people.jpeg";
+import PeopleBackground from "@/public/group.webp";
 import MaskText from "@/components/Server/MaskText";
 import ResponsiveMarquee from "@/components/Client/ResponsiveMarquee";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
@@ -64,7 +64,6 @@ const groups: Group[] = [
       },
       {
         name: "Manuel Herrera",
-        image: "/People/manuel.png",
       },
     ],
   },
@@ -78,7 +77,6 @@ const groups: Group[] = [
       },
       {
         name: "Alejandro Moreno",
-        image: "/People/alejandro.png",
       },
       {
         name: "Cesar Vanegas",
@@ -86,11 +84,9 @@ const groups: Group[] = [
       },
       {
         name: "Christian Orduz",
-        image: "/People/cris_orduz.png",
       },
       {
         name: "Cristhian Tristancho",
-        image: "/People/cristian_tristancho.png",
       },
       {
         name: "Dana Villamizar",
@@ -98,15 +94,12 @@ const groups: Group[] = [
       },
       {
         name: "Jeferson Acevedo",
-        image: "/People/jeferson.png",
       },
       {
         name: "Juan Ardila",
-        image: "/People/juan_ardila.png",
       },
       {
         name: "Juan Arias",
-        image: "/People/juan_arias.png",
       },
       {
         name: "Juan Toloza",
@@ -114,11 +107,9 @@ const groups: Group[] = [
       },
       {
         name: "Juan David Vanegas",
-        image: "/People/juanda_vanegas.png",
       },
       {
         name: "Juan Felipe Serrano",
-        image: "/People/juanfelipe.png",
       },
       {
         name: "Juan Calderon",
@@ -126,35 +117,27 @@ const groups: Group[] = [
       },
       {
         name: "Maria Lucia Rodriguez",
-        image: "/People/maria_lucia.png",
       },
       {
         name: "Mateo Delgado",
-        image: "/People/mateo.png",
       },
       {
         name: "Miguel Ayala",
-        image: "/People/miguel_ayala.png",
       },
       {
         name: "Nicolas Quintero",
-        image: "/People/nicolas_quintero.png",
       },
       {
         name: "Nicolas Rivera",
-        image: "/People/nicolas_rivera.png",
       },
       {
         name: "Oscar Carreno",
-        image: "/People/oscar_carreño.png",
       },
       {
         name: "Oscar Miguel",
-        image: "/People/oscar_miguel.png",
       },
       {
         name: "Samuel Penilla",
-        image: "/People/samuel_penilla.png",
       },
       {
         name: "Sebastian Solano",
@@ -162,7 +145,6 @@ const groups: Group[] = [
       },
       {
         name: "Sebastian Diaz",
-        image: "/People/sebastian_diaz.png",
       },
       {
         name: "Sneider Sanchez",
@@ -204,8 +186,22 @@ function DummyPortrait({
             className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.035]"
           />
         ) : (
-          <div className="flex h-full items-end justify-center bg-[linear-gradient(180deg,rgba(120,255,210,0.08),rgba(9,19,16,0.12))] pb-10">
-            <div className="h-[78%] w-[76%] rounded-t-[999px] bg-[radial-gradient(60%_55%_at_50%_18%,rgba(193,255,229,0.42),rgba(100,212,170,0.15)_50%,rgba(0,0,0,0)_100%)]" />
+          <div className="flex h-full items-center justify-center bg-[linear-gradient(180deg,rgba(120,255,210,0.08),rgba(9,19,16,0.14))] px-8">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 64 64"
+              className="h-[11rem] w-[11rem] text-[#C8F7E3] drop-shadow-[0_18px_48px_rgba(64,179,140,0.2)]"
+              fill="none"
+            >
+              <circle cx="32" cy="20" r="10" fill="currentColor" opacity="0.92" />
+              <path
+                d="M16 52c2.8-9.4 9-14 16-14s13.2 4.6 16 14"
+                stroke="currentColor"
+                strokeWidth="4.5"
+                strokeLinecap="round"
+                opacity="0.92"
+              />
+            </svg>
           </div>
         )}
       </div>
@@ -236,7 +232,7 @@ export default function PeoplePage() {
               alt="CVAIL people group"
               fill
               priority
-              className="object-cover"
+              className="object-cover object-[center_100%]"
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,14,12,0.12),rgba(8,12,10,0.28)_45%,rgba(5,8,7,0.72)_100%)]" />
             <div className="absolute inset-x-0 bottom-0 h-[42%] bg-[linear-gradient(180deg,rgba(5,8,7,0)_0%,rgba(5,8,7,0.28)_22%,rgba(5,8,7,0.62)_62%,rgba(5,8,7,0.92)_100%)]" />
